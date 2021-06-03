@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import { v4 as uuid } from 'uuid';
 import * as AWS from '../../../../aws';
 import { requireAuth } from '../../requireAuth';
 import { FeedItem } from '../models/FeedItem';
@@ -7,12 +8,20 @@ const router: Router = Router();
 
 // Get all feed items
 router.get('/', async (req: Request, res: Response) => {
+    const pid: string = uuid();
+    console.log(new Date().toLocaleString() + `: ${pid} - START - Get all feed items`);
+
     const items = await FeedItem.findAndCountAll({ order: [['id', 'DESC']] });
+
     items.rows.map((item) => {
         if (item.url) {
             item.url = AWS.getGetSignedUrl(item.url);
         }
     });
+
+    const n: number = items.count;
+    console.log(new Date().toLocaleString() + `: ${pid} - END   - Return ${n} feed items` );
+
     res.send(items);
 });
 
@@ -119,3 +128,7 @@ router.post('/',
     });
 
 export const FeedRouter: Router = router;
+
+function uuidv4() {
+        throw new Error('Function not implemented.');
+    }
