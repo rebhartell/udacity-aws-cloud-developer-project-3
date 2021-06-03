@@ -1,13 +1,10 @@
 import * as bcrypt from 'bcrypt';
-import { NextFunction } from 'connect';
 import * as EmailValidator from 'email-validator';
 import { Request, Response, Router } from 'express';
 import * as jwt from 'jsonwebtoken';
+import { requireAuth } from '../../requireAuth';
 import { User } from '../models/User';
 import { config } from './../../../../config/config';
-
-
-
 
 
 const router: Router = Router();
@@ -32,28 +29,6 @@ function generateJWT(user: User): string {
     // Use jwt to create a new JWT Payload containing
 
     return jwt.sign(user.toJSON(), config.jwt.secret);
-}
-
-export function requireAuth(req: Request, res: Response, next: NextFunction) {
-
-    if (!req.headers || !req.headers.authorization) {
-        return res.status(401).send({ message: 'No authorization headers.' });
-    }
-
-// Format is <BEARER><SPACE><TOKEN>
-    const token_bearer = req.headers.authorization.split(' ');
-    if (token_bearer.length != 2) {
-        return res.status(401).send({ message: 'Malformed token.' });
-    }
-
-    const token = token_bearer[1];
-
-    return jwt.verify(token, config.jwt.secret, (err, decoded) => {
-        if (err) {
-            return res.status(500).send({ auth: false, message: 'Failed to authenticate.' });
-        }
-        return next();
-    });
 }
 
 router.get('/verification',
