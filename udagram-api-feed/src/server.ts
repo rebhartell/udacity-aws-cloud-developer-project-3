@@ -1,12 +1,12 @@
-import bodyParser from 'body-parser';
 import express from 'express';
+import { config } from './config/config';
 import { IndexRouter } from './controllers/v0/index.router';
 import { V0MODELS } from './controllers/v0/model.index';
 import { sequelize } from './sequelize';
 
 
 
-
+const c = config;
 
 (async () => {
   // REBH: Additional check because of pg issue fixed by upversioning pg or reverting to Node v12
@@ -30,11 +30,15 @@ import { sequelize } from './sequelize';
   const app = express();
   const port = process.env.PORT || 8080; // default port to listen
 
-  app.use(bodyParser.json());
+  app.use(express.json());
+
+  app.use(express.urlencoded({
+    extended: true
+  }));
 
   //CORS Should be restricted
   app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:8100");
+    res.header("Access-Control-Allow-Origin", c.url);
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
   });
