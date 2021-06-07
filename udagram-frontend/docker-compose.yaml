@@ -1,0 +1,7 @@
+version: "3"
+services:
+  
+  udagram-frontend:
+    image: rebh/udagram-frontend
+    ports:
+      - "8100:80"

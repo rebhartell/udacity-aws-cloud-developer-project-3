@@ -1,0 +1,10 @@
+01/05/2021 01:17:43.971 - 1866ec45-c7ad-4695-b132-0da67771d5dd - Get feed item 100
+Executing (default): SELECT "id", "caption", "url", "createdAt", "updatedAt" FROM "FeedItem" AS "FeedItem" WHERE "FeedItem"."id" = '100';
+01/05/2021 01:17:44.027 - 1866ec45-c7ad-4695-b132-0da67771d5dd - Get feed item 100 - not found - 56 msec
+(node:25) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'url' of null
+    at /usr/src/app/src/controllers/v0/feed/routes/feed.router.ts:48:14
+    at Generator.next (<anonymous>)
+    at fulfilled (/usr/src/app/src/controllers/v0/feed/routes/feed.router.ts:24:58)
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:25) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:25) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.

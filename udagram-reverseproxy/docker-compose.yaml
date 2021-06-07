@@ -1,0 +1,11 @@
+version: "3"
+services:
+
+  udagram-reverseproxy:
+      image: rebh/udagram-reverseproxy
+      ports:
+          - 8080:8080
+      restart: always
+      depends_on:
+        - udagram-api-user
+        - udagram-api-feed

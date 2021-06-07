@@ -1,15 +1,17 @@
 import { Request, Response, Router } from 'express';
-import { v4 as uuid } from 'uuid';
 import * as AWS from '../../../../aws';
+import { timedLog } from '../../../../utils/timedLog';
 import { requireAuth } from '../../requireAuth';
 import { FeedItem } from '../models/FeedItem';
+
 
 const router: Router = Router();
 
 // Get all feed items
 router.get('/', async (req: Request, res: Response) => {
-    const pid: string = uuid();
-    console.log(new Date().toLocaleString() + `: ${pid} - START - Get all feed items`);
+
+    const tLog = timedLog();    
+    tLog.startLog("Get all feed items");
 
     const items = await FeedItem.findAndCountAll({ order: [['id', 'DESC']] });
 
@@ -19,19 +21,24 @@ router.get('/', async (req: Request, res: Response) => {
         }
     });
 
-    const n: number = items.count;
-    console.log(new Date().toLocaleString() + `: ${pid} - END   - Return ${n} feed items` );
+    tLog.endLog(`returned ${items.count}`);
 
     res.send(items);
 });
 
 //Add an endpoint to GET a specific resource by Primary Key
 router.get('/:id', async (req: Request, res: Response) => {
-    let { id } = req.params;
+    const { id } = req.params;
+
+    const tLog = timedLog();    
+    tLog.startLog(`Get feed item ${id}`);
 
     const item = await FeedItem.findByPk(id);
 
     if (!item) {
+
+        tLog.endLog("not found");
+
         res.status(404).send({
             status: 404,
             error: "Not found"
@@ -41,6 +48,9 @@ router.get('/:id', async (req: Request, res: Response) => {
     if (item.url) {
         item.url = AWS.getGetSignedUrl(item.url);
     }
+
+    tLog.endLog("returned");
+
     res.send(item);
 });
 
@@ -48,7 +58,10 @@ router.get('/:id', async (req: Request, res: Response) => {
 router.patch('/:id',
     requireAuth,
     async (req: Request, res: Response) => {
-        let { id } = req.params;
+        const { id } = req.params;
+
+        const tLog = timedLog();    
+        tLog.startLog(`Update feed item ${id}`);
 
         const caption = req.body.caption;
         const fileName = req.body.url;
@@ -56,6 +69,9 @@ router.patch('/:id',
         const item = await FeedItem.findByPk(id);
 
         if (!item) {
+
+            tLog.endLog("not found");
+
             res.status(409).send({
                 status: 409,
                 error: "Conflict - not found"
@@ -64,6 +80,9 @@ router.patch('/:id',
 
         // check Caption is valid
         if (!caption) {
+
+            tLog.endLog("Caption is required");
+
             return res.status(400).send({ message: 'Caption is required or malformed' });
         } else {
             item.caption = caption;
@@ -71,19 +90,25 @@ router.patch('/:id',
 
         // check Filename is valid
         if (!fileName) {
+
+            tLog.endLog("File url is required");
+
             return res.status(400).send({ message: 'File url is required' });
         } else {
             item.url = fileName;
         }
 
-        const updated_item = await item.update({
+        const updatedItem: FeedItem = await item.update({
             caption: item.caption,
             url: item.url
         },
             { where: { id: id } });
 
-        updated_item.url = AWS.getGetSignedUrl(updated_item.url);
-        res.status(201).send(updated_item);
+        updatedItem.url = AWS.getGetSignedUrl(updatedItem.url);
+
+        tLog.endLog("updated");
+
+        res.status(201).send(updatedItem);
 
     });
 
@@ -92,43 +117,58 @@ router.patch('/:id',
 router.get('/signed-url/:fileName',
     requireAuth,
     async (req: Request, res: Response) => {
-        let { fileName } = req.params;
+        const { fileName } = req.params;
+
+        const tLog = timedLog();    
+        tLog.startLog(`Get signed url for ${fileName}`);
+
         const url = AWS.getPutSignedUrl(fileName);
+
+        tLog.endLog("returned");
+
         res.status(201).send({ url: url });
     });
 
-// Post meta data and the filename after a file is uploaded 
-// NOTE the file name is the key name in the s3 bucket.
-// body : {caption: string, fileName: string};
+// Post meta data and the url after a file is uploaded 
+// NOTE the url is the key name in the s3 bucket.
+// body : {caption: string, url: string};
 router.post('/',
     requireAuth,
     async (req: Request, res: Response) => {
         const caption = req.body.caption;
-        const fileName = req.body.url;
+        const url = req.body.url;
+
+        const tLog = timedLog();    
+        tLog.startLog(`Create feed item for ${url}`);
 
         // check Caption is valid
         if (!caption) {
+
+            tLog.endLog("Caption is required");
+
             return res.status(400).send({ message: 'Caption is required or malformed' });
         }
 
         // check Filename is valid
-        if (!fileName) {
+        if (!url) {
+
+            tLog.endLog("File url is required");
+
             return res.status(400).send({ message: 'File url is required' });
         }
 
         const item = await new FeedItem({
             caption: caption,
-            url: fileName
+            url: url
         });
 
-        const saved_item = await item.save();
+        const savedItem: FeedItem = await item.save();
 
-        saved_item.url = AWS.getGetSignedUrl(saved_item.url);
-        res.status(201).send(saved_item);
+        savedItem.url = AWS.getGetSignedUrl(savedItem.url);
+
+        tLog.endLog("saved");
+
+        res.status(201).send(savedItem);
     });
 
 export const FeedRouter: Router = router;
-
-function uuidv4() {
-        throw new Error('Function not implemented.');
-    }

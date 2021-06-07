@@ -5,7 +5,7 @@ Udagram is a simple cloud application developed alongside the Udacity Cloud Engi
 # Solution Overview
 `docker-compose` provides the build logic and helps you conceptualize the relationship between the containers and allows you to run all the containers locally.
 
-A container using nginx named `reverseproxy` is used. It helps add another layer between the frontend and API so that the frontend only uses a single endpoint and doesn't realize it's deployed separately. This is one approach and not necessarily the only way to deploy the services.
+A container using nginx named `udagram-reverseproxy` is used. It helps add another layer between the udagram-frontend and API so that the udagram-frontend only uses a single endpoint and doesn't realize it's deployed separately. This is one approach and not necessarily the only way to deploy the services.
 
 ## Setup Instructions
 
@@ -20,5 +20,5 @@ You'll need to install docker https://docs.docker.com/install/. Open a new termi
 3. Run the container: `docker-compose up`
 
 ## Notes
-* The frontend container starts earlier than the backend containers. Loading the frontend before they are running will prompt an error. Confirm that all the desired containers are running before testing out the frontend and API.
+* The udagram-frontend container starts earlier than the backend containers. Loading the udagram-frontend before they are running will prompt an error. Confirm that all the desired containers are running before testing out the udagram-frontend and API.
 * When migrating this application to use containers, we may run into an issue with the `bcrypt` package. This is because the `node_modules` were installed on an operating system different than that of the one in the Docker image. The solution is to set `node_modules` in our `.dockerignore` file so that `node_modules` are not copied over from our local machine into the container.

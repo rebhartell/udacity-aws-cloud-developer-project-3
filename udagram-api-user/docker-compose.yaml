@@ -1,0 +1,14 @@
+version: "3"
+services:
+  
+  udagram-api-user:
+    image: rebh/udagram-api-user
+    environment:
+      POSTGRES_USERNAME: $POSTGRES_USERNAME
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_HOST: $POSTGRES_HOST
+      JWT_SECRET: $JWT_SECRET
+      URL: "http://localhost:8100"
+    ports:
+      - "8080:8080"

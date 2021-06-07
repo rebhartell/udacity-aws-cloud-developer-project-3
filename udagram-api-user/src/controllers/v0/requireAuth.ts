@@ -11,17 +11,18 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
     }
 
     // Format is <BEARER><SPACE><TOKEN>
-    const token_bearer = req.headers.authorization.split(' ');
-    if (token_bearer.length != 2) {
+    const tokenBearer: string[] = req.headers.authorization.split(' ');
+    if (tokenBearer.length != 2) {
         return res.status(401).send({ message: 'Malformed token.' });
     }
 
-    const token = token_bearer[1];
+    const token = tokenBearer[1];
 
     return jwt.verify(token, config.jwt.secret, (err, decoded) => {
         if (err) {
             return res.status(500).send({ auth: false, message: 'Failed to authenticate.' });
         }
+        
         return next();
     });
 }
