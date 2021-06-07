@@ -1,0 +1,36 @@
+kubectl logs -f udagram-api-feed-7b85bdb56c-kv2t9
+
+> udagram-api-feed@2.0.0 prod /usr/src/app
+> tsc && node ./www/server.js
+
+
+<--- Last few GCs --->
+
+[18:0x6148820]    51267 ms: Mark-sweep (reduce) 510.7 (513.5) -> 510.0 (514.8) MB, 1905.3 / 0.0 ms  (average mu = 0.142, current mu = 0.045) allocation failure scavenge might not succeed
+[18:0x6148820]    53350 ms: Mark-sweep (reduce) 511.0 (516.8) -> 510.3 (517.0) MB, 1997.4 / 0.0 ms  (+ 0.0 ms in 1 steps since start of marking, biggest step 0.0 ms, walltime since start of marking 1998 ms) (average mu = 0.092, current mu = 0.041) allocat
+
+<--- JS stacktrace --->
+
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+ 1: 0xa222f0 node::Abort() [node]
+ 2: 0x96411f node::FatalError(char const*, char const*) [node]
+ 3: 0xb97f1e v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, bool) [node]
+ 4: 0xb98297 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, bool) [node]
+ 5: 0xd52fd5  [node]
+ 6: 0xd53b5f  [node]
+ 7: 0xd61beb v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [node]
+ 8: 0xd657ac v8::internal::Heap::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [node]
+ 9: 0xd33e5b v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationType, v8::internal::AllocationOrigin) [node]
+10: 0x107c5af v8::internal::Runtime_AllocateInYoungGeneration(int, unsigned long*, v8::internal::Isolate*) [node]
+11: 0x1423279  [node]
+Aborted (core dumped)
+npm ERR! code ELIFECYCLE
+npm ERR! errno 134
+npm ERR! udagram-api-feed@2.0.0 prod: `tsc && node ./www/server.js`
+npm ERR! Exit status 134
+npm ERR! 
+npm ERR! Failed at the udagram-api-feed@2.0.0 prod script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /root/.npm/_logs/2021-06-06T19_39_58_445Z-debug.log

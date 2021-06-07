@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node .",
     "tsc": "tsc",
-    "dev": "export $(cat ../set_env.sh | egrep -v '#|^$' | xargs) && ts-node-dev --respawn ./src/server.ts",
+    "dev": "ts-node-dev --respawn ./src/server.ts",
     "prod": "tsc && node ./www/server.js",
     "clean": "rimraf www/ || true",
     "build": "npm run clean && tsc && cp -rf src/config www/config && cp .npmrc www/.npmrc && cp package.json www/package.json && cd www && zip -r Archive.zip . && cd ..",
@@ -18,7 +18,6 @@
   "dependencies": {
     "aws-sdk": "^2.492.0",
     "bcrypt": "^5.0.1",
-    "body-parser": "^1.19.0",
     "email-validator": "^2.0.4",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
