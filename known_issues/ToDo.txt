@@ -1,0 +1,4 @@
+https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+https://microservices.io/patterns/microservices.html
+https://docs.docker.com/develop/develop-images/dockerfile_best-practices/

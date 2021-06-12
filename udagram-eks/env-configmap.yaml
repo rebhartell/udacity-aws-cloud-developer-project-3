@@ -9,5 +9,5 @@ data:
   AWS_REGION: us-east-1
   POSTGRES_DB: udagramhartelldev
   POSTGRES_HOST: udagramhartelldev.cmi0igu9lqtn.us-east-1.rds.amazonaws.com
-  URL: http://localhost:8100  
+  URL: http://a19a19c7f85cc47bd9102bb5d465ff35-574656703.us-east-1.elb.amazonaws.com:8100  
   
