@@ -13,16 +13,16 @@ export class FeedProviderService {
   constructor(private api: ApiService) { }
 
   async getFeed(): Promise<BehaviorSubject<FeedItem[]>> {
-    console.log("Attempt to get items from {API_HOST}/feed ...");
+    console.log('Attempt to get items from {API_HOST}/feed ...');
     const req = await this.api.get('/feed');
-    console.log("... got items - so call to {API_HOST} works!");
+    console.log('... got items - so call to {API_HOST} works!');
     const items = <FeedItem[]> req.rows;
-    console.log("Show no. items and first item (if any) ...");
-    console.log("... items.length = " + items.length);
+    console.log('Show no. items and first item (if any) ...');
+    console.log('... items.length = ' + items.length);
     if (items.length > 0) {
-    console.log("... items[0].caption = " + items[0].caption);
-    console.log("... items[0].id      = " + items[0].id);
-    console.log("... items[0].url     = " + items[0].url);
+    console.log('... items[0].caption = ' + items[0].caption);
+    console.log('... items[0].id      = ' + items[0].id);
+    console.log('... items[0].url     = ' + items[0].url);
   }
   this.currentFeed$.next(items);
     return Promise.resolve(this.currentFeed$);

@@ -4,15 +4,12 @@ import { config } from './config/config';
 const c = config;
 
 //Configure AWS
-if(c.aws_profile !== "DEPLOYED") {
+if(c.aws_profile !== 'DEPLOYED') {
   const credentials: AWS.SharedIniFileCredentials = new AWS.SharedIniFileCredentials({profile: c.aws_profile});
   AWS.config.credentials = credentials;
-  console.log("AWS.config.credentials.accessKeyId: " + AWS.config.credentials.accessKeyId);
+  console.log('AWS.config.credentials.accessKeyId: ' + AWS.config.credentials.accessKeyId);
 }
 
-console.log("config.aws_profile: " + c.aws_profile);
-console.log("config.aws_region: " + c.aws_region);
-console.log("config.aws_media_bucket: " + c.aws_media_bucket);
 
 export const s3: AWS.S3 = new AWS.S3({
   signatureVersion: 'v4',

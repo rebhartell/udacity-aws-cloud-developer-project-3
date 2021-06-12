@@ -12,18 +12,21 @@ menu() {
   Select command:
     1) aws sts get-caller-identity
     2) aws eks list-clusters
-    3) aws eks --region us-east-1 update-kubeconfig --name rebh-dev-eks-cluster
-    4) cat ~/.kube/config
-    5) kubectl get svc
-    6) kubectl cluster-info
-    7) kubectl get pods
-    8) kubectl describe services
+    3) aws eks list-nodegroups --cluster-name <CLUSTER>
+    4) aws eks --region us-east-1 update-kubeconfig --name <CLUSTER>
+    5) cat ~/.kube/config
+    6) kubectl get svc
+    7) kubectl cluster-info
+    8) kubectl get pods
+    9) kubectl describe services
     a) kubectl logs <POD>
     b) kubectl exec -it <POD> /bin/bash
     c) kubectl get secrets
     d) kubectl describe secrets
     e) kubectl get secret <SECRET> -o jsonpath='{.data}'
     f) kubectl get configmap <CONFIGMAP> -o jsonpath='{.data}'
+    g) aws eks delete-cluster --name <CLUSTER>
+    h) aws eks delete-nodegroup --cluster-name <CLUSTER> --nodegroup-name <NODE-GROUP>
     *) exit
   "
 
@@ -37,16 +40,18 @@ menu() {
       2)
           aws eks list-clusters;;
       3)
-          aws eks --region us-east-1 update-kubeconfig --name rebh-dev-eks-cluster;;
+          echo "aws eks list-nodegroups  --cluster-name <CLUSTER>";;
       4)
-          cat ~/.kube/config;;
+          echo "aws eks --region us-east-1 update-kubeconfig --name <CLUSTER>";;
       5)
-          kubectl get svc;;
+          cat ~/.kube/config;;
       6)
-          kubectl cluster-info;;
+          kubectl get svc;;
       7)
-          kubectl get pods;;
+          kubectl cluster-info;;
       8)
+          kubectl get pods;;
+      9)
           kubectl describe services;;
       a)
           echo "kubectl logs <POD>";;
@@ -60,8 +65,13 @@ menu() {
           echo "kubectl get secret <SECRET> -o jsonpath='{.data}'";;        
       f)
           echo "kubectl get configmap <CONFIGMAP> -o jsonpath='{.data}'";;        
+      g)
+          echo "aws eks delete-cluster --name <CLUSTER>";;
+      h)
+          echo "aws eks delete-nodegroup --cluster-name <CLUSTER> --nodegroup-name <NODE-GROUP>";;
       *)
           exit;;
+
   esac
 
   echo ""
