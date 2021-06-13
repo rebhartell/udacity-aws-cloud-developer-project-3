@@ -73,7 +73,6 @@ console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
   // all good requests and non-handled requests will end here
   // This is necessary because send has been used all over the place - not good
   app.use(function (req: Request, res: Response, next: NextFunction) {
-    console.log('Fall through');
 
     // catch the unmapped request URL and raise as an error
     if (res.statusCode === 404) {
@@ -86,8 +85,7 @@ console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 
   // explicit request errors come here
   app.use(function (err: Error, req: Request, res: Response, next: NextFunction) {
-    console.log('Handled ERROR');
-
+    
     // If there is an error message then
     if (err.message) {
       // the response should not have already been sent - so send it now

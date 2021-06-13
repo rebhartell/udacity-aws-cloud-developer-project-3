@@ -1,0 +1,32 @@
+Chrome
+Full application deployed locally
+Create a new post
+Persistent / repeatable - not established
+Log from udagram-api-feed (using extra logging in requireAuth)
+Workaround - modified requireAuth to split on ',' and take first entry
+Observations:
+- Chrome and frontend had been running for some time - multiple deployments
+- Postman tests do not repeat the bearer+token
+
+
+[2021-05-06 16:10:05.058] ff6adc72-c6c3-4b88-866b-9891c047224f - OPTIONS - /api/v0/feed/signed-url/car.jpg
+[2021-05-06 16:10:05.064] 0cc2a4c0-5b36-48b0-8984-a3331bcfb27f - GET - /api/v0/feed/signed-url/car.jpg
+[
+  'jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlYmhAZ21haWwuY29tIiw...fzcaFTSE',
+  'jwt null',
+  'jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlYmhAZ21haWwuY29tIiw...NswMe1Ls',
+  'jwt null',
+  'jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlYmhAZ21haWwuY29tIiw...HcKtplc4'
+]
+[2021-05-06 16:10:05.071] 0cc2a4c0-5b36-48b0-8984-a3331bcfb27f - GET - /api/v0/feed/signed-url/car.jpg - 200 - Signed URL returned - 7 msec
+[2021-05-06 16:10:07.150] ac87845b-1aa5-4334-9502-5d8b26503318 - OPTIONS - /api/v0/feed
+[2021-05-06 16:10:07.158] 3395e047-7db1-4868-be0f-1819321f0831 - POST - /api/v0/feed
+[
+  'jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlYmhAZ21haWwuY29tIiw...fzcaFTSE',
+  'jwt null',
+  'jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlYmhAZ21haWwuY29tIiw...NswMe1Ls',
+  'jwt null',
+  'jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlYmhAZ21haWwuY29tIiw...HcKtplc4'
+]
+Executing (default): INSERT INTO "FeedItem" ("id","caption","url","createdAt","updatedAt") VALUES (DEFAULT,$1,$2,$3,$4) RETURNING *;
+[2021-05-06 16:10:07.655] 3395e047-7db1-4868-be0f-1819321f0831 - POST - /api/v0/feed - 201 - Item saved - 497 msec

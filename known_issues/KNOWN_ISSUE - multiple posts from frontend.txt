@@ -1,0 +1,26 @@
+Firefox
+Full application deployed locally
+Create a new post
+Persistent / repeatable - not established
+Log from udagram-api-feed
+
+[2021-05-06 16:19:36.229] 1e78f3f4-29d8-463d-957c-7da8561daecc - OPTIONS - /api/v0/feed/signed-url/snowcat.jpg
+[2021-05-06 16:19:36.237] d40458c3-5158-453d-8db2-36291a05730e - GET - /api/v0/feed/signed-url/snowcat.jpg
+[
+  'jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlYmhAZ21haWwuY29tIiw...LXBZEEAw'
+]
+[2021-05-06 16:19:36.241] d40458c3-5158-453d-8db2-36291a05730e - GET - /api/v0/feed/signed-url/snowcat.jpg - 200 - Signed URL returned - 4 msec
+[2021-05-06 16:19:37.400] 0d922d38-1b9f-4a7e-8673-8e3885d330dc - OPTIONS - /api/v0/feed
+[2021-05-06 16:19:37.407] 17b6a3db-d736-4c77-8598-9a48b30fbe0b - OPTIONS - /api/v0/feed
+[2021-05-06 16:19:37.408] 726fdc8e-9c9e-4ad8-a529-364e931c3618 - POST - /api/v0/feed
+[
+  'jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlYmhAZ21haWwuY29tIiwicGFzc3dvcmRfaGFzaCI6IiQyYiQxMCR6TUt2aTR5LnJpUnpvM1EzbWs1bDZlZUVNMy8yMFZoQnY0Z1FCaU9CbzJhdFBoRFVHRXlneSIsImNyZWF0ZWRBdCI6IjIwMjEtMDYtMTJUMTQ6NTk6MjYuMzc0WiIsInVwZGF0ZWRBdCI6IjIwMjEtMDYtMTJUMTQ6NTk6MjYuMzc0WiIsImlhdCI6MTYyMzUxNDcyMn0.sP-_1Ux3ud4eS6YZX-g7cRRCbON1Qdp17WYLXBZEEAw'
+]
+[2021-05-06 16:19:37.413] 8325359f-fdaf-4892-a84c-cbe01f39381f - POST - /api/v0/feed
+[
+  'jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlYmhAZ21haWwuY29tIiw...LXBZEEAw'
+]
+Executing (default): INSERT INTO "FeedItem" ("id","caption","url","createdAt","updatedAt") VALUES (DEFAULT,$1,$2,$3,$4) RETURNING *;
+Executing (default): INSERT INTO "FeedItem" ("id","caption","url","createdAt","updatedAt") VALUES (DEFAULT,$1,$2,$3,$4) RETURNING *;
+[2021-05-06 16:19:37.913] 726fdc8e-9c9e-4ad8-a529-364e931c3618 - POST - /api/v0/feed - 201 - Item saved - 505 msec
+[2021-05-06 16:19:37.925] 8325359f-fdaf-4892-a84c-cbe01f39381f - POST - /api/v0/feed - 201 - Item saved - 512 msec

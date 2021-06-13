@@ -577,8 +577,8 @@
 									"    pm.expect(jsonData).to.have.property('createdAt');    ",
 									"});",
 									"",
-									"pm.test(\"Response time is less than 600ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(600);",
+									"pm.test(\"Response time is less than 1000ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1068,7 +1068,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\":\"hello@gmail.com\",\n\t\"password\":\"fancypass\"\n}"
+							"raw": "{\n\t\"email\":\"rebh@gmail.com\",\n\t\"password\":\"password\"\n}"
 						},
 						"url": {
 							"raw": "{{host}}/api/v0/users/auth/login",
@@ -1772,7 +1772,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "2"
+									"value": "1"
 								}
 							]
 						},
@@ -1955,7 +1955,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "2"
+									"value": "1"
 								}
 							]
 						},
@@ -2016,7 +2016,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "2"
+									"value": "1"
 								}
 							]
 						},
@@ -2167,6 +2167,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlYmhAZ21haWwuY29tIiwicGFzc3dvcmRfaGFzaCI6IiQyYiQxMCRvOWt4ODBtWFEwNjZOMUxLYUtEdUFleXc1N1VXeEhjdFBxTkZCSVpTU1pXQ0lxUlR6Z0xneSIsImNyZWF0ZWRBdCI6IjIwMjEtMDYtMDNUMDE6NDQ6MjMuMzgxWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDYtMDNUMDE6NDQ6MjMuMzgxWiIsImlhdCI6MTYyMzUwOTMyOH0.avQBQeAjzdqI5ECAQIHETGuaMWjPxstaEI4SMT1uCDc",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
