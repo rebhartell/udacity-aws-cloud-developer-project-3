@@ -28,9 +28,8 @@ script:
   - docker --version # print the version for logging
   - docker-compose --version # print the version for logging
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker-compose -f ./udagram-docker/docker-compose.yaml -f ./udagram-docker/docker-compose-build.yaml build --parallel
+  - docker-compose -f ./udagram-docker/docker-compose-build.yaml build --parallel
 
 after_success:
-
   - docker-compose -f ./udagram-docker/docker-compose-build.yaml push
 

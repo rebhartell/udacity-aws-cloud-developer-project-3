@@ -17,7 +17,8 @@ You'll need to install docker https://docs.docker.com/install/. Open a new termi
 
 1. Build the images: `docker-compose -f docker-compose-build.yaml build --parallel`
 2. Push the images: `docker-compose -f docker-compose-build.yaml push`
-3. Run the container: `docker-compose up`
+3. Run the container: `docker-compose up -d`
+4. Stop the container: `docker-compose down`
 
 ## Notes
 * The udagram-frontend container starts earlier than the backend containers. Loading the udagram-frontend before they are running will prompt an error. Confirm that all the desired containers are running before testing out the udagram-frontend and API.

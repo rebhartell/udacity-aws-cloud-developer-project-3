@@ -1,0 +1,8 @@
+AWS Management Console
+Create a new cluster
+Persistent / repeatable - yes
+Error message an screen
+Workaround update User policies in IAM - shows as error in IAM but works 
+
+Error loading add-ons
+User: arn:aws:iam::016523083343:user/udagram-richard-dev is not authorized to perform: eks:ListAddons on resource: arn:aws:eks:us-east-1:016523083343:/clusters/rebh-dev-eksctl-cluster/addons

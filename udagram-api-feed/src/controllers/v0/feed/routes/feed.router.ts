@@ -85,7 +85,7 @@ router.get('/',
 
     if (!item) {
       res.status(409);
-      return next(new Error('Conflict - not found'));
+      return next(new Error('Conflict no Feed Item to update'));
     }
 
     // check Caption is valid
@@ -183,7 +183,7 @@ router.post('/',
     savedItem.url = AWS.getGetSignedUrl(savedItem.url);
 
     res.status(201).send(savedItem);
-    res.statusMessage = 'Item saved'
+    res.statusMessage = 'Feed Item saved'
 
     next();
   }

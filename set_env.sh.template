@@ -1,0 +1,11 @@
+# This file is used for convenience of local development.
+# DO NOT STORE YOUR CREDENTIALS INTO GIT
+export AWS_BUCKET=udagram-hartell-dev
+export AWS_PROFILE=default
+export AWS_REGION=us-east-1
+export JWT_SECRET=*************
+export POSTGRES_DB=udagramhartelldev
+export POSTGRES_HOST=udagramhartelldev.cmi0igu9lqtn.us-east-1.rds.amazonaws.com
+export POSTGRES_PASSWORD=***********
+export POSTGRES_USERNAME=***********
+export URL=http://localhost:8100
